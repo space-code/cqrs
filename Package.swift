@@ -6,10 +6,10 @@ import PackageDescription
 let package = Package(
     name: "CQRS",
     platforms: [
-        .macOS(.v10_15),
+        .macOS(.v13),
         .iOS(.v16),
-        .watchOS(.v6),
-        .tvOS(.v11),
+        .watchOS(.v9),
+        .tvOS(.v16),
     ],
     products: [
         .library(
@@ -27,7 +27,7 @@ let package = Package(
         ),
         .testTarget(
             name: "CQRSTests",
-            dependencies: ["CQRS", "Dip"]
+            dependencies: ["CQRS"]
         ),
     ]
 )
