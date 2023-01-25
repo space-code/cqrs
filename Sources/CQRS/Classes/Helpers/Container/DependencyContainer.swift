@@ -26,7 +26,19 @@ extension DependencyContainer: IDependencyContainer {
         container.register { object as any ICommandHandler<T.Command> }
     }
 
+    public func register<Q: IQueryHandler>(_ object: Q) {
+        container.register { object as any IQueryHandler<Q.Query> }
+    }
+
     public func resolve<T: ICommand>() throws -> any ICommandHandler<T> {
+        do {
+            return try container.resolve()
+        } catch {
+            throw CQRSError.failedResolve
+        }
+    }
+
+    public func resolve<Q: IQuery>() throws -> any IQueryHandler<Q> {
         do {
             return try container.resolve()
         } catch {
