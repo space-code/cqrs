@@ -24,6 +24,7 @@ final class CommandDispatcherTests: XCTestCase {
     }
 
     override func tearDown() {
+        commandHandler = nil
         commandDispatcher = nil
         container = nil
         super.tearDown()
@@ -31,7 +32,7 @@ final class CommandDispatcherTests: XCTestCase {
 
     // MARK: Tests
 
-    func test_thatCommandDispatcherExecuteCommand_whenCommandHandlerExistsInContainer() throws {
+    func test_thatCommandDispatcherExecutesCommand_whenCommandHandlerExistsInContainer() throws {
         // given
         let command = CommandMock()
         prepareContainer(with: [commandHandler])
@@ -45,20 +46,20 @@ final class CommandDispatcherTests: XCTestCase {
         XCTAssertTrue(commandHandler.invokedExecuteParameters?.command === command)
     }
 
-    func test_thatCommandDispatcherThrowAnError_whenCommandHandlerDoesNotExistInContainer() throws {
+    func test_thatCommandDispatcherThrowsAnError_whenCommandHandlerDoesNotExistInContainer() throws {
         // given
         let command = CommandMock()
 
         // then
         do {
             try commandDispatcher.execute(command: command)
-            XCTFail("CommandDispatcher must throw an error because of a command handler does not exists in the container.")
+            XCTFail("The CommandDispatcher must throw an error because a command handler does not exist in the container")
         } catch {
             XCTAssertEqual(error as? CQRSError, .failedResolve)
         }
     }
 
-    func test_thatCommandDispatcherExecuteCommandOnRightHandler_whenCoupleOfHandlersExist() throws {
+    func test_thatCommandDispatcherExecutesCommandOnRightHandler_whenCoupleOfHandlersExist() throws {
         // given
         let command = CommandMock()
         let secondCommandHandlerMock = SecondCommandHandlerMock()

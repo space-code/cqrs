@@ -3,7 +3,7 @@
 // Copyright © 2023 Space Code. All rights reserved.
 //
 
-/// Protocol that describes a query object.
+/// The type to which all queries must conform.
 ///
 /// In `CQRS` the query object is only responsible for
 /// executing tasks that modify the state of the application.

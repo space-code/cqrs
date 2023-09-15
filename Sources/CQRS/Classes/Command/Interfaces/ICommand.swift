@@ -3,7 +3,7 @@
 // Copyright © 2023 Space Code. All rights reserved.
 //
 
-/// Protocol that describes a command object.
+/// The type to which all commands must conform.
 ///
 /// In `CQRS` the command object is only responsible for
 /// executing tasks that modify the state of the application.

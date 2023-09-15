@@ -1,12 +1,14 @@
+//
+// CQRS
+// Copyright © 2023 Space Code. All rights reserved.
+//
+
 @testable import CQRS
 import XCTest
 
-private extension Int {
-    static let queryValue = 12031
-}
+// MARK: - QueryDispatcherTests
 
 final class QueryDispatcherTests: XCTestCase {
-
     // MARK: Properties
 
     private var queryDispatcher: IQueryDispatcher!
@@ -28,7 +30,7 @@ final class QueryDispatcherTests: XCTestCase {
 
     // MARK: Tests
 
-    func test_thatQueryDispatcherExecuteCommand_whenQueryHandlerExistsInContainer() throws {
+    func test_thatQueryDispatcherExecutesCommand_whenQueryHandlerExistsInContainer() throws {
         // given
         let queryHandler = QueryHandlerMock()
         queryHandler.stubbedExecute = .queryValue
@@ -45,14 +47,14 @@ final class QueryDispatcherTests: XCTestCase {
         XCTAssertEqual(result, .queryValue)
     }
 
-    func test_thatQueryDispatcherThrowAnError_whenQueryHandlerDoesNotExistInContainer() throws {
+    func test_thatQueryDispatcherThrowsAnError_whenQueryHandlerDoesNotExistInContainer() throws {
         // given
         let query = QueryMock(value: .queryValue)
 
         // then
         do {
             _ = try queryDispatcher.execute(query: query)
-            XCTFail("QueryDispatcher must throw an error because of a query handler does not exists in the container.")
+            XCTFail("The QueryDispatcher must throw an error because a query handler does not exist in the container")
         } catch {
             XCTAssertEqual(error as? CQRSError, .failedResolve)
         }
@@ -63,4 +65,10 @@ final class QueryDispatcherTests: XCTestCase {
     private func prepareContainer(with queryHandlers: [any IQueryHandler]) {
         queryHandlers.forEach { container.register($0) }
     }
+}
+
+// MARK: - Constants
+
+private extension Int {
+    static let queryValue = 12031
 }

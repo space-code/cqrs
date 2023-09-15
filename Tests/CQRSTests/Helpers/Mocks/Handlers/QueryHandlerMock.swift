@@ -1,6 +1,13 @@
+//
+// CQRS
+// Copyright © 2023 Space Code. All rights reserved.
+//
+
 import CQRS
 
 final class QueryHandlerMock: IQueryHandler {
+    typealias Query = QueryMock
+
     var invokedExecute = false
     var invokedExecuteCount = 0
     var invokedExecuteParameters: (query: QueryMock?, Void)?
@@ -14,6 +21,4 @@ final class QueryHandlerMock: IQueryHandler {
         invokedExecuteParametersList.append((query, ()))
         return stubbedExecute!
     }
-
-    typealias Query = QueryMock
 }
