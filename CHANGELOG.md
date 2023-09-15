@@ -2,7 +2,16 @@
 All notable changes to this project will be documented in this file.
 
 #### 1.x Releases
-- `1.0.x` Releases - [1.0.0](#100)
+- `1.0.x` Releases - [1.0.0](#100) | [1.0.1](#101)
+
+## [1.0.1](https://github.com/space-code/cqrs/releases/tag/1.0.1)
+Released on 2023-09-15
+
+### Added
+- Integrate CodeCov.
+
+### Updated
+- Documentation typos.
 
 ## [1.0.0](https://github.com/space-code/cqrs/releases/tag/1.0.0)
 Released on 2023-01-20.

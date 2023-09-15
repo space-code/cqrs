@@ -8,6 +8,7 @@
 <a href="https://developer.apple.com/swift"><img alt="Swift5.7" src="https://img.shields.io/badge/language-Swift5.7-orange.svg"/></a>
 <a href="https://github.com/space-code/cqrs"><img alt="CI" src="https://github.com/space-code/cqrs/actions/workflows/ci.yml/badge.svg?branch=main"></a>
 <a href="https://github.com/apple/swift-package-manager" alt="CQRS on Swift Package Manager" title="cqrs on Swift Package Manager"><img src="https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg" /></a>
+<a href="https://codecov.io/gh/space-code/cqrs"><img alt="CodeCov" src="https://codecov.io/gh/space-code/cqrs/graph/badge.svg?token=TI0NEXLCTX"></a>
 </p>
 
 ## Description
@@ -155,7 +156,7 @@ Once you have your Swift package set up, adding `cqrs` as a dependency is as eas
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/space-code/cqrs.git", .upToNextMajor(from: "1.0.0"))
+    .package(url: "https://github.com/space-code/cqrs.git", .upToNextMajor(from: "1.0.1"))
 ]
 ```
 
