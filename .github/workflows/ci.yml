@@ -46,12 +46,15 @@ jobs:
           - destination: "OS=16.1,name=iPhone 14 Pro"
             name: "iOS"
             scheme: "CQRS"
+            sdk: iphonesimulator
           - destination: "OS=16.1,name=Apple TV"
             name: "tvOS"
             scheme: "CQRS"
+            sdk: appletvsimulator
           - destination: "OS=9.1,name=Apple Watch Series 8 (45mm)"
             name: "watchOS"
             scheme: "CQRS"
+            sdk: watchsimulator
     steps:
       - uses: actions/checkout@v3
       - name: ${{ matrix.name }}
