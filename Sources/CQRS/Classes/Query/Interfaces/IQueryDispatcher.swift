@@ -3,19 +3,19 @@
 // Copyright © 2023 Space Code. All rights reserved.
 //
 
-/// Protocol that describes a query dispatcher.
+/// A type that is used for executing queries.
 ///
-/// `IQueryDispatcher` is a centralization way to execute a query.
-/// It resolves the correct query handler for the given query.
+/// `IQueryDispatcher` is a centralized way to execute a query.
+///  It resolves the appropriate query handler for a given query.
 public protocol IQueryDispatcher {
-    /// Execute a query which conforms to `IQuery` protocol.
+    /// Executes a query that conforms to the `IQuery` protocol.
     ///
-    /// A query dispatch object resolves a query handler for given type of the query.
-    /// If query handler exists in the container, the query will be executed.
+    /// A query dispatch object resolves a query handler for the given type of query.
+    /// If the query handler exists in the container, the query will be executed.
     ///
-    /// - Parameter query: A query object.
+    /// - Parameter command: The query object.
     ///
-    /// - Throws: `CQRSError.failedResolve`failed to resolve command handler.
+    /// - Throws: `CQRSError.failedResolve`if the query handler failed to resolve.
     ///
     /// - Returns: A query result.
     func execute<Q: IQuery>(query: Q) throws -> Q.Result
