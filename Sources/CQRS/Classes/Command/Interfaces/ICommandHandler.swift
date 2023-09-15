@@ -3,14 +3,14 @@
 // Copyright © 2023 Space Code. All rights reserved.
 //
 
-/// Protocol that describes a command handler.
+/// A type that encapsulates the logic for executing a command.
 public protocol ICommandHandler<Command> {
     associatedtype Command: ICommand
 
-    /// Execute a command.
+    /// Executes a command.
     ///
-    /// - Throws: `CQRSError.failedResolve` failed to resolve command handler.
+    /// - Throws: `CQRSError.failedResolve` if the command handler failed to resolve.
     ///
-    /// - Parameter command: A command object.
+    /// - Parameter command: The command object.
     func execute(command: Command) throws
 }

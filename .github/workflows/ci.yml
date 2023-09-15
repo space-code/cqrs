@@ -5,14 +5,34 @@ on:
     branches:
       - main
       - dev
+    paths:
+      - ".github/workflows/**"
+      - "Package.swift"
+      - "Source/**"
+      - "Tests/**"
   pull_request:
-    branches: [ main ]
+    paths:
+      - '.swiftlint.yml'
+      - ".github/workflows/**"
+      - "Package.swift"
+      - "Source/**"
+      - "Tests/**"
 
 concurrency:
   group: ci
   cancel-in-progress: true
 
 jobs:
+  SwiftLint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: GitHub Action for SwiftLint
+        uses: norio-nomura/action-swiftlint@3.2.1
+        with:
+          args: --strict
+        env:
+          DIFF_BASE: ${{ github.base_ref }}
   Latest:
     name: Test Latest (iOS, macOS, tvOS, watchOS)
     runs-on: macOS-12
@@ -26,13 +46,22 @@ jobs:
           - destination: "OS=16.1,name=iPhone 14 Pro"
             name: "iOS"
             scheme: "CQRS"
+            sdk: iphonesimulator
           - destination: "OS=16.1,name=Apple TV"
             name: "tvOS"
             scheme: "CQRS"
+            sdk: appletvsimulator
           - destination: "OS=9.1,name=Apple Watch Series 8 (45mm)"
             name: "watchOS"
             scheme: "CQRS"
+            sdk: watchsimulator
     steps:
       - uses: actions/checkout@v3
       - name: ${{ matrix.name }}
-        run: xcodebuild test -scheme "${{ matrix.scheme }}" -destination "${{ matrix.destination }}" clean
+        run: xcodebuild test -scheme "${{ matrix.scheme }}" -destination "${{ matrix.destination }}" clean -enableCodeCoverage YES -resultBundlePath "./${{ matrix.sdk }}.xcresult" | xcpretty -r junit
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3.1.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          xcode: true
+          xcode_archive_path: "./${{ matrix.sdk }}.xcresult"

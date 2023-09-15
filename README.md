@@ -7,11 +7,12 @@
 <a href="https://developer.apple.com/"><img alt="Platform" src="https://img.shields.io/badge/platform-ios%20%7C%20osx%20%7C%20watchos%20%7C%20tvos-%23989898"/></a> 
 <a href="https://developer.apple.com/swift"><img alt="Swift5.7" src="https://img.shields.io/badge/language-Swift5.7-orange.svg"/></a>
 <a href="https://github.com/space-code/cqrs"><img alt="CI" src="https://github.com/space-code/cqrs/actions/workflows/ci.yml/badge.svg?branch=main"></a>
-<a href="https://github.com/apple/swift-package-manager" alt="RxSwift on Swift Package Manager" title="cqrs on Swift Package Manager"><img src="https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg" /></a>
+<a href="https://github.com/apple/swift-package-manager" alt="CQRS on Swift Package Manager" title="cqrs on Swift Package Manager"><img src="https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg" /></a>
+<a href="https://codecov.io/gh/space-code/cqrs"><img alt="CodeCov" src="https://codecov.io/gh/space-code/cqrs/graph/badge.svg?token=TI0NEXLCTX"></a>
 </p>
 
 ## Description
-`cqrs` is an implementation of the command and query responsibility segregation in Swift
+`cqrs` is an implementation of the command and query responsibility segregation in Swift.
 
 - [Usage](#usage)
 - [Requirements](#requirements)
@@ -23,7 +24,9 @@
 
 ## Usage
 
-1. Create an instance of a command or a query conforms to `ICommand` or `IQuery` respectively:
+1. `ICommand` and `IQuery` contain data for use by an appropriate handler.
+
+Create an instance of a command that conforms to `ICommand` or a query that conforms to `IQuery`, respectively:
 ```swift
 import CQRS
 
@@ -58,7 +61,9 @@ final class ExampleQuery: IQueue {
 }
 ```
 
-2. Create an instance of a command handler or a query handler conforms to `ICommandHandler` or `IQueryHandler` respectively:
+2. A command handler or a query handler contains the execution logic for a command or a query.
+
+Create an instance of a command handler that conforms to `ICommandHandler` or a query handler that conforms to `IQueryHandler`, respectively:
 ```swift
 import CQRS
 
@@ -68,7 +73,7 @@ final class ExampleCommandHandler: ICommandHandler {
   // MARK: ICommandHandler
 
   func execute(command: Command) throws {
-    // write execution logic
+    // write the execution logic here
   }
 }
 ```
@@ -82,12 +87,12 @@ final class ExampleQueryHandler: IQueryHandler {
     // MARK: IQueryHandler
 
     func execute(query: Query) throws -> Query.Result {
-        // write execution logic
+        // write the execution logic here
     }
 }
 ```
 
-3. Register your handler implementation in container:
+3. Register your handler implementation in the container:
 ```swift
 import CQRS
 
@@ -102,7 +107,7 @@ let container = DependencyContainer()
 container.register { ExampleQueryHandler() }
 ```
 
-4. Create an instance of a `CommandDispatcher` or a `QueryDispatcher` with created container, like this:
+4. Create an instance of a `CommandDispatcher` or a `QueryDispatcher` with the created container, like this:
 ```swift
 import CQRS
 
@@ -151,7 +156,7 @@ Once you have your Swift package set up, adding `cqrs` as a dependency is as eas
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/space-code/cqrs.git", .upToNextMajor(from: "1.0.0"))
+    .package(url: "https://github.com/space-code/cqrs.git", .upToNextMajor(from: "1.0.1"))
 ]
 ```
 

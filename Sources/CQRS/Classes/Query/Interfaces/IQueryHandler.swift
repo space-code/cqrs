@@ -3,14 +3,14 @@
 // Copyright © 2023 Space Code. All rights reserved.
 //
 
-/// Protocol that describes a query handler.
+/// A type that encapsulates the logic for executing a query.
 public protocol IQueryHandler<Query> {
     associatedtype Query: IQuery
 
-    /// Execute a query.
+    /// Executes a query.
     ///
-    /// - Throws: `CQRSError.failedResolve` failed to resolve query handler.
+    /// - Throws: `CQRSError.failedResolve`if the command handler failed to resolve.
     ///
-    /// - Parameter query: A query object.
+    /// - Parameter query: The query object.
     func execute(query: Query) -> Query.Result
 }
