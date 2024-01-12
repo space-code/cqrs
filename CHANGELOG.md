@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 #### Added
+- Integrate `visionOS` support
+  - Added in Pull Request [#6](https://github.com/space-code/cqrs/pull/6)
 - Update GitHub Actions, integrate `danger`, and update templates
   - Added in Pull Request [#5](https://github.com/space-code/cqrs/pull/5)
 - Add badges for Swift Version Compatibility and Platform Compatibility
