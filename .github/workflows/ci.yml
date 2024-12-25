@@ -5,6 +5,11 @@ on:
     branches:
       - main
       - dev
+    paths:
+      - ".github/workflows/**"
+      - "Package.swift"
+      - "Source/**"
+      - "Tests/**"
   pull_request:
     paths:
       - '.swiftlint.yml'
